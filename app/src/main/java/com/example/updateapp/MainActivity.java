@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityResultLauncher activityResultLauncher;
     private AppUpdateManager appUpdateManager;
+    private static int DAYS_FOR_FLEXIBLE_UPDATE = 7;
+    private static int DAYS_FOR_IMMEDIATE_UPDATE = 14;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     } // Close onCreate Method Here
 
+    // =============================== In App Update Method START HERE ======================
 
     private void checkInAppUpdate(){
         appUpdateManager = AppUpdateManagerFactory.create(getApplicationContext());
@@ -76,14 +79,19 @@ public class MainActivity extends AppCompatActivity {
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
         appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE){
 
-                appUpdateManager.startUpdateFlowForResult(
-
-                        appUpdateInfo,
-                        activityResultLauncher,
-                        AppUpdateOptions.newBuilder(AppUpdateType.FLEXIBLE).build());
+                if (appUpdateInfo.clientVersionStalenessDays() != null
+                        && appUpdateInfo.clientVersionStalenessDays() >= DAYS_FOR_IMMEDIATE_UPDATE
+                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                    // Request the update.
+                    startInAppUpdate(appUpdateInfo, AppUpdateType.IMMEDIATE);
+                } else if (appUpdateInfo.clientVersionStalenessDays() != null
+                        && appUpdateInfo.clientVersionStalenessDays() >= DAYS_FOR_FLEXIBLE_UPDATE
+                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+                    // Request the update.
+                    startInAppUpdate(appUpdateInfo, AppUpdateType.FLEXIBLE);
+                }
 
             }
         });
@@ -145,6 +153,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void startInAppUpdate(AppUpdateInfo appUpdateInfo, Integer updateType){
+        appUpdateManager.startUpdateFlowForResult(
+
+                appUpdateInfo,
+                activityResultLauncher,
+                AppUpdateOptions.newBuilder(updateType).build());
+    }
+
+    // =============================== In App Update Method CLOSE HERE ======================
 
 
 
