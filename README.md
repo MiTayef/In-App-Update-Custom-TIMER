@@ -8,12 +8,12 @@
 
 <!-- Banner Me Area -->
 <h2>Information About App and Developers 👑</h2>
-<img src="https://github.com/user-attachments/assets/ab314ca3-26b1-49ab-88ab-d66487020e94" /> </br></br>
+<img src="https://github.com/user-attachments/assets/94620b03-6aa8-4727-b5a3-f2a1a7d7561a" /> </br></br>
 
 
 <!-- App Features Area -->
 <h3>App Key Features 💎</h3>
-<p>✔ Optional Update Showing When User Using The App</p>
+<p>✔ Custom Set Day For Flexible and Immidiate Update</p>
 </br></br>
 
 
