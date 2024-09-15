@@ -12,7 +12,7 @@
 
 
 <!-- App Features Area -->
-<h3>App Key Features ✨</h3>
+<h3>App Key Features 💎</h3>
 <p>✔ Optional Update Showing When User Using The App</p>
 </br></br>
 
