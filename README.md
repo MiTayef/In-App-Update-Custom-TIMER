@@ -8,7 +8,7 @@
 
 <!-- Banner Me Area -->
 <h2>Information About App and Developers 👑</h2>
-<img src="https://github.com/user-attachments/assets/157fb968-98bc-42cf-8b41-60d2c2a96d9f" /> </br></br>
+<img src="https://github.com/user-attachments/assets/ab314ca3-26b1-49ab-88ab-d66487020e94" /> </br></br>
 
 
 <!-- App Features Area -->
